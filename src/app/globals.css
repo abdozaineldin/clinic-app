@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fdf8f6;
+  --foreground: #2d1b28;
+  --plum-deep: #2d1b28;
+  --plum-dark: #1a0f1b;
+  --blush-soft: #fdf8f6;
+  --blush-medium: #f7eae6;
+  --blush-accent: #eccec5;
+  --rose-gold: #e29578;
+  --rose-gold-hover: #d87b5b;
+  --gold-accent: #c99e55;
+  --gold-light: #f4e7ce;
+  --card-bg: #ffffff;
+  --text-muted: #6e5c6b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-plum-deep: var(--plum-deep);
+  --color-plum-dark: var(--plum-dark);
+  --color-blush-soft: var(--blush-soft);
+  --color-blush-medium: var(--blush-medium);
+  --color-blush-accent: var(--blush-accent);
+  --color-rose-gold: var(--rose-gold);
+  --color-rose-gold-hover: var(--rose-gold-hover);
+  --color-gold-accent: var(--gold-accent);
+  --color-gold-light: var(--gold-light);
+  --color-card-bg: var(--card-bg);
+  --color-text-muted: var(--text-muted);
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family:
+    "Cairo",
+    "Alexandria",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  direction: rtl;
+  text-align: right;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fdf8f6;
+}
+::-webkit-scrollbar-thumb {
+  background: #e29578;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2d1b28;
+}
+
+/* Glassmorphism utility */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 149, 120, 0.2);
+}
+
+.glass-plum {
+  background: rgba(45, 27, 40, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Leaflet Map RTL adjustments */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  z-index: 10;
+}
