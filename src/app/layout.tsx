@@ -3,6 +3,8 @@ import { Cairo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import WhatsAppButton from "@/components/whatsapp-button";
+import ScrollToTop from "@/components/scroll-to-top";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -30,6 +32,8 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppButton />
+        <ScrollToTop />
       </body>
     </html>
   );

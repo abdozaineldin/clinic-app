@@ -78,6 +78,16 @@ export default async function HomePage() {
                   <span>استكشفي خدماتنا</span>
                   <ChevronLeft size={18} />
                 </Link>
+
+                <a
+                  href="https://wa.me/201145430300"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white px-6 py-3.5 rounded-full font-bold shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-[1.02] transition-all"
+                >
+                  <MessageCircle size={18} />
+                  <span>تواصل واتساب</span>
+                </a>
               </div>
 
               {/* Trust Badge */}
