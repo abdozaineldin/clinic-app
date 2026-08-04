@@ -22,7 +22,7 @@ export default function ScrollToTop() {
     <button
       onClick={scrollToTop}
       aria-label="العودة لأعلى الصفحة"
-      className={`fixed cursor-pointer bottom-24 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#2D1B28] hover:bg-[#4A2D43] text-white shadow-lg hover:scale-105 transition-all duration-300 ${
+      className={`floating-action-btn fixed cursor-pointer bottom-24 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#2D1B28] hover:bg-[#4A2D43] text-white shadow-lg hover:scale-105 transition-all duration-300 ${
         visible
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 translate-y-4 pointer-events-none"

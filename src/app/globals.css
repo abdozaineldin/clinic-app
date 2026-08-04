@@ -86,3 +86,8 @@ body {
   border-radius: 1rem;
   z-index: 10;
 }
+
+/* Hide floating buttons when mobile menu is open */
+body.menu-open .floating-action-btn {
+  display: none !important;
+}
