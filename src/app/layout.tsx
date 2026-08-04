@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: "د. منال سرحان | مركز الجلدية والتجميل والعلاج بالليزر",
   description:
     "الموقع الرسمي لعيادات د. منال سرحان استشارية الأمراض الجلدية والتجميل والعلاج بالليزر. احجزي موعدك الآن للحصول على أحدث الخدمات التجميلية والعناية بالبشرة.",
+  openGraph: {
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
