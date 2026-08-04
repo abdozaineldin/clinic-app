@@ -154,7 +154,7 @@ export default function Navbar() {
 
       {/* Side Drawer Container */}
       <div
-        className={`fixed top-0 right-0 h-screen w-80 max-w-[85vw] bg-white z-[60] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out xl:hidden ${
+        className={`fixed top-0 right-0 h-dvh w-80 max-w-[85vw] bg-white z-[60] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out xl:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
