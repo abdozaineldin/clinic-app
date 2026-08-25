@@ -39,6 +39,14 @@ export default async function HomePage() {
   const allArticles = await getArticles();
   const allReviews = await getReviews();
 
+  if (!homepage) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-24 text-center">
+        <EmptyState />
+      </div>
+    );
+  }
+
   const featuredServices = allServices.slice(0, 6);
   const featuredBeforeAfters = allBeforeAfters.slice(0, 4);
   const recentArticles = allArticles.slice(0, 2);
