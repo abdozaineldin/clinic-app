@@ -9,7 +9,7 @@ import {
   Clock,
   CheckCircle2,
 } from "lucide-react";
-import { getServiceBySlug, getServices } from "@/lib/strapi";
+import { getServiceBySlug, getServices } from "@/lib/supabase-data";
 
 export const revalidate = 60;
 
@@ -136,7 +136,7 @@ export default async function ServiceDetailPage({
               </div>
 
               <Link
-                href="/booking"
+                href={`/booking?service=${service.id}`}
                 className="w-full flex items-center justify-center gap-2 bg-[#E29578] hover:bg-[#d87b5b] text-white py-3.5 rounded-full font-bold shadow-md text-sm transition-all"
               >
                 <Calendar size={18} />

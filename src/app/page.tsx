@@ -20,18 +20,21 @@ import {
 import {
   getHomepageData,
   getServices,
+  getBranches,
   getBeforeAfters,
   getArticles,
   getReviews,
-} from "@/lib/strapi";
+} from "@/lib/supabase-data";
 import BeforeAfterSlider from "@/components/before-after-slider-client";
 import EmptyState from "@/components/empty-state";
+import QuickBookingWidget from "@/components/quick-booking-widget";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
   const homepage = await getHomepageData();
   const allServices = await getServices();
+  const allBranches = await getBranches();
   const allBeforeAfters = await getBeforeAfters();
   const allArticles = await getArticles();
   const allReviews = await getReviews();
@@ -68,14 +71,14 @@ export default async function HomePage() {
                   className="flex items-center gap-2.5 bg-gradient-to-r from-[#E29578] to-[#2D1B28] text-white px-7 py-3.5 rounded-full font-bold shadow-lg shadow-rose-200 hover:shadow-xl hover:scale-[1.02] transition-all"
                 >
                   <Calendar size={18} />
-                  <span>احجزي موعدك الآن</span>
+                  <span>احجز موعدك الآن</span>
                 </Link>
 
                 <Link
                   href="/services"
                   className="flex items-center gap-2 bg-white text-[#2D1B28] border border-rose-200 px-6 py-3.5 rounded-full font-semibold shadow-xs hover:bg-rose-50 transition-colors"
                 >
-                  <span>استكشفي خدماتنا</span>
+                  <span>استكشف خدماتنا</span>
                   <ChevronLeft size={18} />
                 </Link>
 
@@ -98,7 +101,7 @@ export default async function HomePage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Award size={16} className="text-[#D4AF37]" />
-                  <span>استشارية سعودية معتمدة</span>
+                  <span>استشارية معتمدة</span>
                 </div>
               </div>
             </div>
@@ -194,49 +197,14 @@ export default async function HomePage() {
 
       {/* 3. Quick Booking Widget */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-pink-100">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="space-y-1 text-center lg:text-right">
-              <span className="text-xs font-bold text-[#E29578] uppercase tracking-wider">
-                حجز سريع مباشر
-              </span>
-              <h3 className="text-xl font-bold text-[#2D1B28]">
-                اختاري الفرع والخدمة واحجزي موعدكِ بضغطة زر
-              </h3>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-              <select className="flex-1 lg:w-48 px-4 py-3 bg-pink-50/50 border border-pink-200 rounded-xl text-xs font-semibold text-slate-700 outline-none">
-                <option>اختاري الفرع</option>
-                <option>فرع الزرقا</option>
-                <option>فرع النزل</option>
-                <option>سنتر النزل</option>
-              </select>
-
-              <select className="flex-1 lg:w-56 px-4 py-3 bg-pink-50/50 border border-pink-200 rounded-xl text-xs font-semibold text-slate-700 outline-none">
-                <option>اختاري الخدمة المطلوبة</option>
-                <option>إزالة الشعر بالليزر</option>
-                <option>حقن البوتوكس والفيلر</option>
-                <option>تنظيف الهيدرافايشل</option>
-                <option>علاج التصبغات بالفراكشنال</option>
-              </select>
-
-              <Link
-                href="/booking"
-                className="w-full lg:w-auto bg-[#E29578] hover:bg-[#d87b5b] text-white px-7 py-3 rounded-xl text-sm font-bold shadow-md text-center transition-colors shrink-0"
-              >
-                تأكيد وتوجيه للحجز
-              </Link>
-            </div>
-          </div>
-        </div>
+        <QuickBookingWidget branches={allBranches} services={allServices} />
       </section>
 
       {/* 4. Why Choose Us Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
           <span className="text-xs font-bold text-[#E29578] uppercase tracking-widest">
-            لماذا تختارين عيادتنا؟
+            لماذا تختار عيادتنا؟
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#2D1B28]">
             رعاية تجميلية فائقة الدقة والاحترافية
@@ -505,10 +473,10 @@ export default async function HomePage() {
         <div className="bg-gradient-to-r from-[#2D1B28] via-[#4A2D43] to-[#2D1B28] rounded-3xl p-8 sm:p-12 text-white text-center shadow-2xl relative overflow-hidden space-y-6">
           <div className="relative z-10 max-w-2xl mx-auto space-y-4">
             <span className="text-xs font-bold text-amber-300 tracking-widest uppercase">
-              جاهزة لاستعادة نضارتكِ؟
+              جاهز لاستعادة نضارتك؟
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
-              احجزي استشارتكِ الطبية مع د. منال سرحان اليوم
+              احجز استشارتك الطبية مع د. منال سرحان اليوم
             </h2>
             <p className="text-xs sm:text-sm text-pink-100/80 leading-relaxed">
               فريقنا الطبي بانتظارك لتقديم الاستشارة وتصميم الخطة العلاجية
@@ -519,7 +487,7 @@ export default async function HomePage() {
                 href="/booking"
                 className="bg-[#E29578] hover:bg-[#d87b5b] text-white px-8 py-3.5 rounded-full font-bold shadow-lg text-sm transition-all"
               >
-                احجزي موعدك الآن
+                احجز موعدك الآن
               </Link>
               <a
                 href="https://wa.me/966114567890"

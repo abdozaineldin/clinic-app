@@ -8,7 +8,7 @@ import {
   CheckCircle2,
   X,
 } from "lucide-react";
-import { getReviews } from "@/lib/strapi";
+import { getReviews } from "@/lib/supabase-data";
 import { ReviewData } from "@/lib/types";
 import EmptyState from "@/components/empty-state";
 
@@ -75,7 +75,7 @@ export default function ReviewsPage() {
             className="flex items-center gap-2 bg-gradient-to-r from-[#E29578] to-[#2D1B28] text-white px-7 py-3.5 rounded-full text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
           >
             <MessageSquarePlus size={18} />
-            <span>اكتبي رأيكِ وتجربتكِ</span>
+            <span>اكتب رأيكِ وتجربتكِ</span>
           </button>
         </div>
       </section>
@@ -156,7 +156,7 @@ export default function ReviewsPage() {
 
             <div className="space-y-1">
               <span className="text-xs font-bold text-[#E29578]">
-                مشاركتكِ تهمنا
+                مشاركتك تهمنا
               </span>
               <h3 className="text-xl font-bold text-[#2D1B28]">
                 إضافة تقييم جديد
@@ -168,7 +168,7 @@ export default function ReviewsPage() {
                 <CheckCircle2 size={36} className="mx-auto text-emerald-600" />
                 <h4 className="font-bold text-base">شكراً لكِ!</h4>
                 <p className="text-xs">
-                  تم استقبال تقييمكِ بنجاح وسوف يتم اعتماده ونشره قريباً.
+                  تم استقبال تقييمك بنجاح وسوف يتم اعتماده ونشره قريباً.
                 </p>
               </div>
             ) : (
@@ -181,7 +181,7 @@ export default function ReviewsPage() {
               >
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700">
-                    اسمكِ الكريمة
+                    اسمك الكريمة
                   </label>
                   <input
                     type="text"
@@ -220,7 +220,7 @@ export default function ReviewsPage() {
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700">
-                    رأيكِ وتعليقكِ
+                    رأيك وتعليقكِ
                   </label>
                   <textarea
                     rows={3}

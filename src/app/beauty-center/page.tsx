@@ -8,13 +8,17 @@ import {
   Gem,
   Image as ImageIcon,
 } from "lucide-react";
-import { getBeautyCenterData } from "@/lib/strapi";
+import { getBeautyCenterData } from "@/lib/supabase-data";
 import EmptyState from "@/components/empty-state";
 
 export const revalidate = 60;
 
 export default async function BeautyCenterPage() {
   const beauty = await getBeautyCenterData();
+
+  if (!beauty) {
+    return <EmptyState title="بيانات الصفحة غير متوفرة حالياً" />;
+  }
 
   return (
     <div className="space-y-16 pb-20 pt-6">
@@ -46,7 +50,7 @@ export default async function BeautyCenterPage() {
                 className="inline-flex items-center gap-2 bg-[#E29578] hover:bg-[#d87b5b] text-white px-8 py-3.5 rounded-full font-bold shadow-lg text-sm transition-all"
               >
                 <Calendar size={18} />
-                <span>احجزي تجربتكِ التجميلية الآن</span>
+                <span>احجز تجربتك التجميلية الآن</span>
               </Link>
             </div>
           </div>
@@ -96,7 +100,7 @@ export default async function BeautyCenterPage() {
               مميزات المركز
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#2D1B28]">
-              لماذا يعتبر مركزنا وجهتكِ المثالية؟
+              لماذا يعتبر مركزنا وجهتك المثالية؟
             </h2>
           </div>
 
@@ -136,7 +140,7 @@ export default async function BeautyCenterPage() {
           </div>
           <div className="flex items-center gap-1 text-xs text-slate-400">
             <ImageIcon size={16} />
-            <span>اسحبي للاستعراض</span>
+            <span>اسحب للاستعراض</span>
           </div>
         </div>
 
@@ -175,7 +179,7 @@ export default async function BeautyCenterPage() {
               href="/booking"
               className="bg-[#E29578] hover:bg-[#d87b5b] text-white px-8 py-3.5 rounded-full font-bold shadow-md text-xs sm:text-sm transition-all"
             >
-              احجزي باقة التجميل الآن
+              احجز باقة التجميل الآن
             </Link>
           </div>
         </div>

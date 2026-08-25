@@ -10,7 +10,7 @@ import {
   Mail,
   CheckCircle2,
 } from "lucide-react";
-import { getArticles } from "@/lib/strapi";
+import { getArticles } from "@/lib/supabase-data";
 import { ArticleData } from "@/lib/types";
 import EmptyState from "@/components/empty-state";
 
@@ -54,8 +54,8 @@ export default function BlogPage() {
           مقالات ونصائح د. منال سرحان
         </h1>
         <p className="text-sm text-slate-500 max-w-2xl mx-auto">
-          اطلعي على أحدث المقالات والإرشادات الطبية المعتمدة للحفاظ على صحة
-          بشرتك وتألق جمالك.
+          اطلع على أحدث المقالات والإرشادات الطبية المعتمدة للحفاظ على صحة بشرتك
+          وتألق جمالك.
         </p>
       </section>
 
@@ -150,7 +150,7 @@ export default function BlogPage() {
                           href={`/blog/${article.slug}`}
                           className="font-bold text-[#2D1B28] group-hover:text-[#E29578] transition-colors"
                         >
-                          اقرأي المزيد ←
+                          اقرأ المزيد ←
                         </Link>
                       </div>
                     </div>
@@ -211,17 +211,17 @@ export default function BlogPage() {
                   النشرة الطبية
                 </span>
                 <h3 className="text-lg font-bold text-white">
-                  اشتركي ليصلكِ كل جديد
+                  اشترك ليصلك كل جديد
                 </h3>
                 <p className="text-xs text-pink-200/80">
-                  احصلي على نصائح العناية بالبشرة وأحدث العروض حصرية في بريدكِ.
+                  احصل على نصائح العناية بالبشرة وأحدث العروض حصرية في بريدك.
                 </p>
               </div>
 
               {subscribed ? (
                 <div className="bg-emerald-950/80 border border-emerald-500/40 p-4 rounded-2xl flex items-center gap-2 text-emerald-300 text-xs font-bold">
                   <CheckCircle2 size={18} />
-                  <span>شكراً لاشتراككِ في النشرة البريدية!</span>
+                  <span>شكراً لاشتراكك في النشرة البريدية!</span>
                 </div>
               ) : (
                 <form
@@ -234,7 +234,7 @@ export default function BlogPage() {
                   <input
                     type="email"
                     required
-                    placeholder="أدخلي بريدكِ الإلكتروني..."
+                    placeholder="أدخل بريدك الإلكتروني..."
                     className="w-full px-4 py-2.5 bg-white/10 border border-white/20 rounded-xl text-xs text-white placeholder-slate-400 outline-none"
                   />
                   <button

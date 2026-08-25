@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Clock, Calendar, Share2, Sparkles } from "lucide-react";
-import { getArticleBySlug, getArticles } from "@/lib/strapi";
+import { getArticleBySlug, getArticles } from "@/lib/supabase-data";
 
 export const revalidate = 60;
 

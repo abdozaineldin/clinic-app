@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Sparkles, ShieldAlert, Filter } from "lucide-react";
-import { getBeforeAfters } from "@/lib/strapi";
+import { getBeforeAfters } from "@/lib/supabase-data";
 import { BeforeAfterData } from "@/lib/types";
 import BeforeAfterSlider from "@/components/before-after-slider";
 import EmptyState from "@/components/empty-state";
@@ -44,8 +44,8 @@ export default function BeforeAfterGalleryPage() {
           معرض صور قبل وبعد العلاج
         </h1>
         <p className="text-sm text-slate-500 max-w-2xl mx-auto">
-          شاهدي نتائج الجلسات العلاجية والتجميلية الحقيقية لمراجعاتنا بالعيادة
-          واستكشفي التغيير الملحوظ.
+          شاهد نتائج الجلسات العلاجية والتجميلية الحقيقية لمراجعاتنا بالعيادة
+          واستكشف التغيير الملحوظ.
         </p>
       </section>
 

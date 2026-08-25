@@ -8,7 +8,7 @@ import {
   HelpCircle,
   Sparkles,
 } from "lucide-react";
-import { getFAQs } from "@/lib/strapi";
+import { getFAQs } from "@/lib/supabase-data";
 import { FAQData } from "@/lib/types";
 import EmptyState from "@/components/empty-state";
 
@@ -53,7 +53,7 @@ export default function FAQPage() {
           الأسئلة الشائعة والمعلومات الطبية
         </h1>
         <p className="text-sm text-slate-500 max-w-2xl mx-auto">
-          جمعنا لكِ أبرز تساؤلات المراجعات حول علاجات الليزر، الحقن التجميلي،
+          جمعنا لك أبرز تساؤلات المراجعات حول علاجات الليزر، الحقن التجميلي،
           والروتين اليومي للبشرة.
         </p>
       </section>
@@ -68,7 +68,7 @@ export default function FAQPage() {
             />
             <input
               type="text"
-              placeholder="ابحثي عن سؤالكِ (ألم الليزر، ثبات الفيلر، الهيدرافايشل...)..."
+              placeholder="ابحث عن سؤالكِ (ألم الليزر، ثبات الفيلر، الهيدرافايشل...)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pr-12 pl-4 py-3 bg-pink-50/40 border border-pink-200 rounded-2xl text-xs sm:text-sm text-slate-800 outline-none focus:border-[#E29578] transition-colors"
@@ -147,7 +147,7 @@ export default function FAQPage() {
         ) : (
           <EmptyState
             title="لم نجد إجابة لبحثكِ"
-            description="جربي البحث بكلمات أخرى أو تواصلي مباشرة مع فريق العيادة للحصول على إجابة وافية."
+            description="جرب البحث بكلمات أخرى أو تواصل مباشرة مع فريق العيادة للحصول على إجابة وافية."
           />
         )}
       </section>
@@ -156,14 +156,14 @@ export default function FAQPage() {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#2D1B28] text-white p-8 rounded-3xl text-center shadow-xl border border-amber-500/20 space-y-4">
           <span className="text-xs font-bold text-amber-300">
-            لم تجدي إجابة لسؤالكِ؟
+            لم تجد إجابة لسؤالكِ؟
           </span>
           <h3 className="text-xl font-bold text-white">
             فريق الاستشارات الطبية جاهز للإجابة عبر الواتساب
           </h3>
           <p className="text-xs text-pink-100/80 max-w-md mx-auto">
-            تواصل معنا مباشرة وسنقوم بالرد على كافة استفساراتكِ ومساعدتكِ في
-            تحديد الإجراء المناسب.
+            تواصل معنا مباشرة وسنقوم بالرد على كافة استفساراتك ومساعدتك في تحديد
+            الإجراء المناسب.
           </p>
           <div className="pt-2">
             <a

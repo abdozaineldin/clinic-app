@@ -43,10 +43,10 @@ export default function BeforeAfterSlider({
         className="w-full h-72 sm:h-80 md:h-96"
       />
       {/* Overlay Badge Labels */}
-      <div className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-20">
+      <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-20">
         {beforeLabel}
       </div>
-      <div className="absolute top-3 left-3 bg-[#E29578]/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-20">
+      <div className="absolute top-3 right-3 bg-[#E29578]/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-20">
         {afterLabel}
       </div>
     </div>

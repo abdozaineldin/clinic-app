@@ -8,13 +8,17 @@ import {
   Quote,
   Newspaper,
 } from "lucide-react";
-import { getAboutPageData } from "@/lib/strapi";
+import { getAboutPageData } from "@/lib/supabase-data";
 import EmptyState from "@/components/empty-state";
 
 export const revalidate = 60;
 
 export default async function AboutPage() {
   const about = await getAboutPageData();
+
+  if (!about) {
+    return <EmptyState title="بيانات الصفحة غير متوفرة حالياً" />;
+  }
 
   return (
     <div className="space-y-16 pb-20 pt-8">
@@ -72,13 +76,13 @@ export default async function AboutPage() {
                 href="/booking"
                 className="bg-gradient-to-r from-[#E29578] to-[#2D1B28] text-white px-7 py-3 rounded-full text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all"
               >
-                احجزي موعدكِ الآن مع الدكتورة
+                احجز موعدك الآن مع الدكتورة
               </Link>
               <Link
                 href="/services"
                 className="bg-pink-50 text-[#2D1B28] px-6 py-3 rounded-full text-xs sm:text-sm font-bold hover:bg-pink-100 transition-colors"
               >
-                استعرضي الخدمات
+                استعرض الخدمات
               </Link>
             </div>
           </div>
@@ -200,7 +204,7 @@ export default async function AboutPage() {
               href="/booking"
               className="bg-[#E29578] hover:bg-[#d87b5b] text-white px-8 py-3.5 rounded-full font-bold shadow-lg text-xs sm:text-sm transition-all"
             >
-              احجزي استشارتك الخاصة الآن
+              احجز استشارتك الخاصة الآن
             </Link>
           </div>
         </div>

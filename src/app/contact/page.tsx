@@ -10,7 +10,7 @@ import {
   CheckCircle2,
   Building2,
 } from "lucide-react";
-import { getBranches, sendContactMessage } from "@/lib/strapi";
+import { getBranches, sendContactMessage } from "@/lib/supabase-data";
 import { BranchData } from "@/lib/types";
 import BranchMap from "@/components/branch-map";
 

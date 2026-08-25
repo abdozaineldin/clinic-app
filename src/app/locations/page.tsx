@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { MapPin, Phone, Clock, Calendar, Building2 } from "lucide-react";
-import { getBranches } from "@/lib/strapi";
+import { getBranches } from "@/lib/supabase-data";
 import BranchMap from "@/components/branch-map";
 import EmptyState from "@/components/empty-state";
 
@@ -93,7 +93,7 @@ export default async function LocationsPage() {
 
                   <div className="p-6 pt-0">
                     <Link
-                      href="/booking"
+                      href={`/booking?branch=${branch.id}`}
                       className="w-full flex items-center justify-center gap-2 bg-[#E29578] hover:bg-[#d87b5b] text-white py-3 rounded-2xl text-xs font-bold shadow-md transition-colors"
                     >
                       <Calendar size={15} />

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Sparkles, ArrowLeft, Filter } from "lucide-react";
-import { getServices } from "@/lib/strapi";
+import { getServices } from "@/lib/supabase-data";
 import { ServiceData } from "@/lib/types";
 import EmptyState from "@/components/empty-state";
 

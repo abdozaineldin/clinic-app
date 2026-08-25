@@ -138,3 +138,28 @@ export interface ContactMessageInput {
   email: string;
   message: string;
 }
+
+// 11. Booking Types
+export interface BookingData {
+  id: string | number;
+  branch: BranchData | string | number;
+  service: ServiceData | string | number;
+  date: string;
+  time: string;
+  patientName: string;
+  patientPhone: string;
+  patientEmail?: string;
+  status: "pending" | "confirmed" | "cancelled";
+  createdAt?: string;
+}
+
+export interface CreateBookingInput {
+  branch: string | number;
+  service: string | number;
+  date: string;
+  time: string;
+  patientName: string;
+  patientPhone: string;
+  patientEmail?: string;
+}
+

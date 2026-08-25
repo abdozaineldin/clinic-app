@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sparkles, Calendar, Globe, PhoneCall } from "lucide-react";
+import { Menu, X, Sparkles, Calendar, PhoneCall } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [lang, setLang] = useState<"AR" | "EN">("AR");
   const pathname = usePathname();
+
+  if (pathname?.startsWith("/admin")) return null;
 
   useEffect(() => {
     if (isOpen) {
@@ -37,10 +38,6 @@ export default function Navbar() {
     { name: "تواصل معنا", href: "/contact" },
   ];
 
-  const toggleLanguage = () => {
-    setLang((prev) => (prev === "AR" ? "EN" : "AR"));
-  };
-
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100 shadow-sm transition-all duration-300">
       {/* Top Banner Contact / Micro Bar */}
@@ -57,20 +54,8 @@ export default function Navbar() {
               className="hidden sm:flex items-center gap-1 hover:text-amber-300 transition-colors"
             >
               <PhoneCall size={12} />
-              <span>+966 11 456 7890</span>
+              <span>+201145430300</span>
             </a>
-          </div>
-          <div className="flex items-center space-x-3 space-x-reverse">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-amber-200 transition-all cursor-pointer"
-              title="تغيير اللغة"
-            >
-              <Globe size={13} />
-              <span className="font-bold">
-                {lang === "AR" ? "العربية (AR)" : "English (EN)"}
-              </span>
-            </button>
           </div>
         </div>
       </div>
@@ -205,16 +190,6 @@ export default function Navbar() {
 
         {/* Drawer Footer Call to Action */}
         <div className="shrink-0 p-5 border-t border-slate-100 bg-slate-50/80 space-y-3">
-          <button
-            onClick={toggleLanguage}
-            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold text-xs hover:bg-white transition-colors"
-          >
-            <Globe size={15} />
-            <span>
-              اللغة الحالية: {lang === "AR" ? "العربية" : "English"} (تبديل)
-            </span>
-          </button>
-
           <Link
             href="/booking"
             onClick={() => setIsOpen(false)}
