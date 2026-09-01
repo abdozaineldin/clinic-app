@@ -506,13 +506,7 @@ export default async function HomePage() {
                 <MessageCircle size={18} />
                 <span>تواصل عبر واتساب</span>
               </a>
-              <a
-                href="tel:+966114567890"
-                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3.5 rounded-full font-bold text-sm transition-all"
-              >
-                <PhoneCall size={18} />
-                <span>اتصال مباشر</span>
-              </a>
+
             </div>
           </div>
         </div>

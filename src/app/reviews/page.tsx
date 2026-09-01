@@ -69,14 +69,6 @@ export default function ReviewsPage() {
               </p>
             </div>
           </div>
-
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 bg-gradient-to-r from-[#E29578] to-[#2D1B28] text-white px-7 py-3.5 rounded-full text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
-          >
-            <MessageSquarePlus size={18} />
-            <span>اكتب رأيكِ وتجربتكِ</span>
-          </button>
         </div>
       </section>
 
