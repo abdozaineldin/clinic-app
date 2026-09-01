@@ -42,20 +42,18 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100 shadow-sm transition-all duration-300">
       {/* Top Banner Contact / Micro Bar */}
       <div className="bg-[#2D1B28] text-white py-1.5 px-4 text-xs font-medium border-b border-amber-500/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4 space-x-reverse">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between space-x-4 space-x-reverse">
             <span className="flex items-center gap-1.5 text-amber-300">
               <Sparkles size={13} className="animate-pulse" />
               مرحباً بكِ في عيادات د. منال سرحان التخصصية
             </span>
-            <span className="hidden sm:inline-block text-pink-200/60">|</span>
-            <a
-              href="tel:+966114567890"
+            <p
               className="hidden sm:flex items-center gap-1 hover:text-amber-300 transition-colors"
             >
               <PhoneCall size={12} />
               <span>+201145430300</span>
-            </a>
+            </p>
           </div>
         </div>
       </div>
@@ -88,11 +86,10 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                    isActive
-                      ? "text-[#E29578] bg-rose-50/80 shadow-xs"
-                      : "text-slate-700 hover:text-[#2D1B28] hover:bg-pink-50/50"
-                  }`}
+                  className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isActive
+                    ? "text-[#E29578] bg-rose-50/80 shadow-xs"
+                    : "text-slate-700 hover:text-[#2D1B28] hover:bg-pink-50/50"
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -141,9 +138,8 @@ export default function Navbar() {
 
       {/* Side Drawer Container */}
       <div
-        className={`fixed top-0 right-0 h-dvh w-80 max-w-[85vw] bg-white z-[60] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out xl:hidden ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-dvh w-80 max-w-[85vw] bg-white z-[60] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out xl:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         {/* Drawer Header */}
         <div className="shrink-0 p-5 bg-gradient-to-l from-[#2D1B28] to-[#4A2D43] text-white flex items-center justify-between">
@@ -176,11 +172,10 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                  isActive
-                    ? "bg-rose-50 text-[#E29578] border-r-4 border-[#E29578]"
-                    : "text-slate-700 hover:bg-slate-50"
-                }`}
+                className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${isActive
+                  ? "bg-rose-50 text-[#E29578] border-r-4 border-[#E29578]"
+                  : "text-slate-700 hover:bg-slate-50"
+                  }`}
               >
                 <span>{link.name}</span>
               </Link>
