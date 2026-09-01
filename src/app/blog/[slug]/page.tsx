@@ -2,16 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Clock, Calendar, Share2, Sparkles } from "lucide-react";
-import { getArticleBySlug, getArticles } from "@/lib/supabase-data";
+import { getArticleBySlug } from "@/lib/supabase-data";
 
-export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const articles = await getArticles();
-  return articles.map((article) => ({
-    slug: article.slug,
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function ArticleDetailPage({
   params,

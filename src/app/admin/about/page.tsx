@@ -68,86 +68,148 @@ export default function AdminAboutEditor() {
     }
   };
 
-  const handleAddTimeline = () => {
+  const handleAddTimeline = async () => {
     if (!data || !timelineYear || !timelineTitle) return;
-    const newItem: TimelineItem = {
-      id: Date.now(),
-      year: timelineYear,
-      title: timelineTitle,
-      description: timelineDesc,
-    };
-    const updated = [...data.timeline, newItem];
-    setData({ ...data, timeline: updated });
-    setIsTimelineModal(false);
 
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     if (url && !url.includes("placeholder")) {
       const supabase = createClient();
-      supabase.from("about_timeline").insert({
+      const { data: inserted, error } = await supabase
+        .from("about_timeline")
+        .insert({
+          year: timelineYear,
+          title: timelineTitle,
+          description: timelineDesc,
+          sort_order: data.timeline.length + 1,
+        })
+        .select()
+        .single();
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      if (inserted) {
+        const newItem: TimelineItem = {
+          id: inserted.id,
+          year: inserted.year,
+          title: inserted.title,
+          description: inserted.description,
+        };
+        const updated = [...data.timeline, newItem];
+        setData({ ...data, timeline: updated });
+        setIsTimelineModal(false);
+      }
+    } else {
+      const newItem: TimelineItem = {
+        id: Date.now(),
         year: timelineYear,
         title: timelineTitle,
         description: timelineDesc,
-        sort_order: updated.length,
-      });
+      };
+      const updated = [...data.timeline, newItem];
+      setData({ ...data, timeline: updated });
+      setIsTimelineModal(false);
     }
   };
 
-  const handleDeleteTimeline = (id?: number) => {
+  const handleDeleteTimeline = async (id?: number) => {
     if (!data || !id) return;
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    if (url && !url.includes("placeholder")) {
+      const supabase = createClient();
+      await supabase.from("about_timeline").delete().eq("id", id);
+    }
     setData({ ...data, timeline: data.timeline.filter((t) => t.id !== id) });
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    if (url && !url.includes("placeholder")) {
-      const supabase = createClient();
-      supabase.from("about_timeline").delete().eq("id", id);
-    }
   };
 
-  const handleAddCert = () => {
+  const handleAddCert = async () => {
     if (!data || !certName) return;
-    const newItem: CertificationItem = { id: Date.now(), name: certName };
-    const updated = [...data.certifications, newItem];
-    setData({ ...data, certifications: updated });
-    setIsCertModal(false);
 
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     if (url && !url.includes("placeholder")) {
       const supabase = createClient();
-      supabase.from("about_certifications").insert({ name: certName, sort_order: updated.length });
+      const { data: inserted, error } = await supabase
+        .from("about_certifications")
+        .insert({ name: certName, sort_order: data.certifications.length + 1 })
+        .select()
+        .single();
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      if (inserted) {
+        const newItem: CertificationItem = {
+          id: inserted.id,
+          name: inserted.name,
+        };
+        const updated = [...data.certifications, newItem];
+        setData({ ...data, certifications: updated });
+        setIsCertModal(false);
+      }
+    } else {
+      const newItem: CertificationItem = { id: Date.now(), name: certName };
+      const updated = [...data.certifications, newItem];
+      setData({ ...data, certifications: updated });
+      setIsCertModal(false);
     }
   };
 
-  const handleDeleteCert = (id?: number) => {
+  const handleDeleteCert = async (id?: number) => {
     if (!data || !id) return;
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    if (url && !url.includes("placeholder")) {
+      const supabase = createClient();
+      await supabase.from("about_certifications").delete().eq("id", id);
+    }
     setData({ ...data, certifications: data.certifications.filter((c) => c.id !== id) });
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    if (url && !url.includes("placeholder")) {
-      const supabase = createClient();
-      supabase.from("about_certifications").delete().eq("id", id);
-    }
   };
 
-  const handleAddPress = () => {
+  const handleAddPress = async () => {
     if (!data || !pressName) return;
-    const newItem: PressLogoItem = { id: Date.now(), name: pressName };
-    const updated = [...data.pressLogos, newItem];
-    setData({ ...data, pressLogos: updated });
-    setIsPressModal(false);
 
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     if (url && !url.includes("placeholder")) {
       const supabase = createClient();
-      supabase.from("about_press_logos").insert({ name: pressName, sort_order: updated.length });
+      const { data: inserted, error } = await supabase
+        .from("about_press_logos")
+        .insert({ name: pressName, sort_order: data.pressLogos.length + 1 })
+        .select()
+        .single();
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      if (inserted) {
+        const newItem: PressLogoItem = {
+          id: inserted.id,
+          name: inserted.name,
+        };
+        const updated = [...data.pressLogos, newItem];
+        setData({ ...data, pressLogos: updated });
+        setIsPressModal(false);
+      }
+    } else {
+      const newItem: PressLogoItem = { id: Date.now(), name: pressName };
+      const updated = [...data.pressLogos, newItem];
+      setData({ ...data, pressLogos: updated });
+      setIsPressModal(false);
     }
   };
 
-  const handleDeletePress = (id?: number) => {
+  const handleDeletePress = async (id?: number) => {
     if (!data || !id) return;
-    setData({ ...data, pressLogos: data.pressLogos.filter((p) => p.id !== id) });
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     if (url && !url.includes("placeholder")) {
       const supabase = createClient();
-      supabase.from("about_press_logos").delete().eq("id", id);
+      await supabase.from("about_press_logos").delete().eq("id", id);
     }
+    setData({ ...data, pressLogos: data.pressLogos.filter((p) => p.id !== id) });
   };
 
   if (loading || !data) {
