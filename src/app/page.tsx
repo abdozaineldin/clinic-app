@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Sparkles,
   Calendar,
@@ -9,13 +8,14 @@ import {
   Users,
   Building2,
   Stethoscope,
+  MessageCircle,
+  Star,
+  ArrowLeft,
   ShieldCheck,
   HeartHandshake,
   UserCheck,
-  MessageCircle,
-  PhoneCall,
-  Star,
-  ArrowLeft,
+  ClipboardCheck,
+  Microscope,
 } from "lucide-react";
 import {
   getHomepageData,
@@ -28,8 +28,19 @@ import {
 import BeforeAfterSlider from "@/components/before-after-slider-client";
 import EmptyState from "@/components/empty-state";
 import QuickBookingWidget from "@/components/quick-booking-widget";
+import Reveal from "@/components/Reveal";
+import AnimatedCounter from "@/components/animated-counter";
 
 export const revalidate = 60;
+
+const whyChooseUsIcons = [
+  Microscope,
+  Award,
+  ShieldCheck,
+  HeartHandshake,
+  UserCheck,
+  ClipboardCheck,
+];
 
 export default async function HomePage() {
   const homepage = await getHomepageData();
@@ -54,115 +65,141 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-16 pb-20">
-      {/* 1. Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-pink-50/60 via-[#FDF8F6] to-white py-16 md:py-24 border-b border-rose-100/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Right Text Content */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-100/80 text-[#2D1B28] text-xs font-bold shadow-xs">
-                <Sparkles size={14} className="text-[#E29578]" />
-                <span>العيادة الطبية المعتمدة للجلدية والتجميل</span>
+      {/* 1. Hero Section — Editorial Overlap */}
+      <section className="px-4 sm:px-6 lg:px-8 pt-6">
+        <div className="max-w-[1600px] mx-auto relative">
+          <Reveal
+            as="div"
+            variant="fade"
+            delay={1}
+            className="hidden lg:flex absolute -right-2 top-1/2 -translate-y-1/2 z-20 items-center gap-3 rotate-90 origin-center"
+          >
+            <span className="text-[11px] tracking-[0.3em] text-[#2D1B28]/50 font-semibold whitespace-nowrap">
+              منال سرحان كلينك · تأسست{" "}
+              {homepage.statsYearsExperience
+                ? new Date().getFullYear() -
+                  Number(homepage.statsYearsExperience)
+                : "٢٠٠٥"}
+            </span>
+            <span className="w-10 h-px bg-[#D4AF37]/50" />
+          </Reveal>
+
+          <div className="relative w-full h-[78vh] min-h-[560px] max-h-[760px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-[#D4AF37]/25 shadow-xl shadow-[#2D1B28]/15">
+            {homepage.heroImage ? (
+              <img
+                src={homepage.heroImage as string}
+                alt="عيادة د. منال سرحان"
+                className="hero-kenburns absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-rose-50 flex items-center justify-center text-rose-300">
+                لا تتوفر صورة
               </div>
+            )}
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-[#2D1B28]">
-                {homepage.heroTitle}
-              </h1>
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#2D1B28]/50 via-[#2D1B28]/15 to-[#E29578]/5 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#2D1B28]/90 via-[#2D1B28]/50 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#2D1B28]/90 via-[#2D1B28]/50 to-transparent" />
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                {homepage.heroSubtitle}
-              </p>
+            {/* Live availability chip */}
+            <Reveal
+              variant="fade"
+              delay={0.4}
+              className="absolute top-6 sm:top-8 right-6 sm:right-10 flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full ps-3 pe-4 py-2"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              <span className="text-white/90 text-xs font-semibold">
+                متاحة للحجز اليوم
+              </span>
+            </Reveal>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <Link
-                  href="/booking"
-                  className="flex items-center gap-2.5 bg-gradient-to-r from-[#E29578] to-[#2D1B28] text-white px-7 py-3.5 rounded-full font-bold shadow-lg shadow-rose-200 hover:shadow-xl hover:scale-[1.02] transition-all"
-                >
-                  <Calendar size={18} />
-                  <span>احجز موعدك الآن</span>
-                </Link>
+            {/* Bottom content — free-standing, no card */}
+            <div className="absolute bottom-8 sm:bottom-12 md:bottom-14 right-6 sm:right-10 md:right-14 left-6 sm:left-10 md:left-14">
+              <div className="max-w-2xl space-y-5">
+                <Reveal variant="rise" delay={0.1}>
+                  <p className="text-white/70 text-sm font-light [text-shadow:0_1px_10px_rgba(0,0,0,0.3)]">
+                    {homepage.statsYearsExperience}+ عاماً خبرة ·{" "}
+                    {homepage.statsBranchesCount} فروع · استشارية معتمدة
+                  </p>
+                </Reveal>
 
-                <Link
-                  href="/services"
-                  className="flex items-center gap-2 bg-white text-[#2D1B28] border border-rose-200 px-6 py-3.5 rounded-full font-semibold shadow-xs hover:bg-rose-50 transition-colors"
-                >
-                  <span>استكشف خدماتنا</span>
-                  <ChevronLeft size={18} />
-                </Link>
+                <Reveal variant="rise" delay={0.25}>
+                  <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-[1.15] text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.35)]">
+                    {homepage.heroTitle}
+                  </h1>
+                </Reveal>
 
-                <a
-                  href="https://wa.me/201145430300"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white px-6 py-3.5 rounded-full font-bold shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-[1.02] transition-all"
-                >
-                  <MessageCircle size={18} />
-                  <span>تواصل واتساب</span>
-                </a>
-              </div>
+                <Reveal variant="rise" delay={0.4}>
+                  <p className="text-sm sm:text-base text-white/70 leading-relaxed font-light max-w-lg [text-shadow:0_1px_12px_rgba(0,0,0,0.3)]">
+                    {homepage.heroSubtitle}
+                  </p>
+                </Reveal>
 
-              {/* Trust Badge */}
-              <div className="pt-6 flex items-center gap-6 border-t border-rose-100 text-xs text-slate-500">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-[#E29578]" />
-                  <span>أجهزة حاصلة على اعتماد FDA</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Award size={16} className="text-[#D4AF37]" />
-                  <span>استشارية معتمدة</span>
-                </div>
-              </div>
-            </div>
+                <Reveal variant="rise" delay={0.55}>
+                  <div className="flex flex-wrap items-center gap-3 pt-2">
+                    <Link
+                      href="/booking"
+                      className="flex items-center gap-2 bg-[#E29578] text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg shadow-black/20 hover:bg-[#d87b5b] hover:scale-[1.03] active:scale-95 transition-all"
+                    >
+                      <Calendar size={16} />
+                      <span>احجزي موعدك الآن</span>
+                    </Link>
 
-            {/* Left Hero Image Container */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                <div className="absolute -inset-4 bg-gradient-to-r from-[#E29578] to-[#D4AF37] rounded-3xl blur-2xl opacity-25" />
-                <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-white aspect-4/5">
-                  {homepage.heroImage ? (
-                    <img
-                      src={homepage.heroImage as string}
-                      alt="د. منال سرحان"
-                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-rose-50 flex items-center justify-center text-rose-300">
-                      لا تتوفر صورة
-                    </div>
-                  )}
-                  <div className="absolute bottom-4 right-4 left-4 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-rose-100 shadow-lg flex items-center justify-between">
-                    <div>
-                      <h4 className="font-bold text-sm text-[#2D1B28]">
-                        د. منال سرحان
-                      </h4>
-                      <p className="text-xs text-slate-500">
-                        استشارية الجلدية والتجميل
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1 bg-amber-50 text-amber-600 px-2.5 py-1 rounded-full text-xs font-bold">
-                      <Star
-                        size={12}
-                        className="fill-amber-400 text-amber-400"
-                      />
-                      <span>4.9 / 5</span>
-                    </div>
+                    <a
+                      href="https://wa.me/201142832015"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 bg-white/10 border border-white/25 text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-white/20 hover:scale-[1.03] active:scale-95 transition-all"
+                    >
+                      <MessageCircle size={16} />
+                      <span>واتساب</span>
+                    </a>
                   </div>
-                </div>
+                </Reveal>
               </div>
             </div>
           </div>
+
+          {/* Rating card overlapping the top edge of the frame */}
+          <Reveal
+            variant="scale"
+            delay={0.7}
+            duration={0.7}
+            className="hidden md:flex absolute -top-6 left-10 lg:left-14 z-20 items-center gap-4 bg-white rounded-2xl shadow-xl shadow-[#2D1B28]/10 border border-pink-100 px-6 py-4"
+          >
+            <div className="flex items-center gap-1 text-amber-400">
+              <Star size={16} className="fill-amber-400" />
+            </div>
+            <div className="w-px h-8 bg-slate-100" />
+            <div>
+              <p className="text-lg font-extrabold text-[#2D1B28] leading-none">
+                4.9 / 5
+              </p>
+              <p className="text-[11px] text-slate-400 mt-1">
+                تقييم أكثر من {homepage.statsHappyPatients} مراجعة
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* 2. Stats Bar Section */}
+      {/* 2. Stats Bar Section (Dark) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#2D1B28] text-white rounded-3xl p-8 shadow-xl border border-amber-500/20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-white/10">
+        <Reveal
+          variant="rise"
+          className="bg-[#2D1B28] text-white rounded-3xl p-8 shadow-xl border border-amber-500/20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-white/10"
+          staggerChildren
+          stagger={0.15}
+        >
           <div className="space-y-1">
             <div className="flex justify-center text-amber-300 mb-2">
               <Award size={28} />
             </div>
             <div className="text-3xl sm:text-4xl font-extrabold text-amber-300">
-              +{homepage.statsYearsExperience}
+              <AnimatedCounter value={`+${homepage.statsYearsExperience}`} />
             </div>
             <div className="text-xs text-pink-200/80">
               عاماً من الخبرة الطبية
@@ -174,7 +211,7 @@ export default async function HomePage() {
               <Users size={28} />
             </div>
             <div className="text-3xl sm:text-4xl font-extrabold text-amber-300">
-              {homepage.statsHappyPatients}
+              <AnimatedCounter value={homepage.statsHappyPatients} />
             </div>
             <div className="text-xs text-pink-200/80">
               مراجعة سعيدة بالنتائج
@@ -186,7 +223,7 @@ export default async function HomePage() {
               <Building2 size={28} />
             </div>
             <div className="text-3xl sm:text-4xl font-extrabold text-amber-300">
-              {homepage.statsBranchesCount}
+              <AnimatedCounter value={homepage.statsBranchesCount} />
             </div>
             <div className="text-xs text-pink-200/80">فروع تخصصية فاخرة</div>
           </div>
@@ -196,56 +233,79 @@ export default async function HomePage() {
               <Stethoscope size={28} />
             </div>
             <div className="text-3xl sm:text-4xl font-extrabold text-amber-300">
-              {homepage.statsSpecialtiesCount}
+              <AnimatedCounter value={homepage.statsSpecialtiesCount} />
             </div>
-            <div className="text-xs text-pink-200/80">تخصص وإجراء تجميلي</div>
+            <div className="text-xs text-pink-200/80">
+              تخصص وإجراء تجميلي
+            </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
-      {/* 3. Quick Booking Widget */}
+      {/* 3. Quick Booking Widget (Light) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <QuickBookingWidget branches={allBranches} services={allServices} />
+        <Reveal variant="rise">
+          <QuickBookingWidget branches={allBranches} services={allServices} />
+        </Reveal>
       </section>
 
-      {/* 4. Why Choose Us Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <span className="text-xs font-bold text-[#E29578] uppercase tracking-widest">
-            لماذا تختار عيادتنا؟
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#2D1B28]">
-            رعاية تجميلية فائقة الدقة والاحترافية
-          </h2>
-        </div>
+      {/* 4. Why Choose Us Section (Dark) */}
+      <section className="px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-[#2D1B28] rounded-[2.5rem] px-6 sm:px-10 py-16 sm:py-20 relative overflow-hidden border border-amber-500/10 shadow-2xl">
+            <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#E29578]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        {homepage.whyChooseUs?.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {homepage.whyChooseUs.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all space-y-3"
+            <Reveal
+              variant="fade"
+              className="relative text-center max-w-2xl mx-auto mb-12 space-y-3"
+            >
+              <span className="text-xs font-bold text-amber-300 uppercase tracking-widest">
+                لماذا تختار عيادتنا؟
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+                رعاية تجميلية فائقة الدقة والاحترافية
+              </h2>
+            </Reveal>
+
+            {homepage.whyChooseUs?.length > 0 ? (
+              <Reveal
+                variant="scale"
+                staggerChildren
+                stagger={0.12}
+                className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
               >
-                <div className="w-12 h-12 rounded-xl bg-pink-50 text-[#E29578] flex items-center justify-center">
-                  <Sparkles size={22} />
-                </div>
-                <h3 className="font-bold text-base text-[#2D1B28]">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+                {homepage.whyChooseUs.map((item, idx) => {
+                  const ItemIcon =
+                    whyChooseUsIcons[idx % whyChooseUsIcons.length];
+                  return (
+                    <div
+                      key={idx}
+                      className="group bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:border-amber-400/40 hover:bg-white/10 hover:-translate-y-1 transition-all space-y-3"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-300 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                        <ItemIcon size={22} />
+                      </div>
+                      <h3 className="font-bold text-base text-white">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-pink-100/60 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  );
+                })}
+              </Reveal>
+            ) : (
+              <EmptyState />
+            )}
           </div>
-        ) : (
-          <EmptyState />
-        )}
+        </div>
       </section>
 
-      {/* 5. Featured Services Preview */}
+      {/* 5. Featured Services Preview (Light) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-10">
+        <Reveal variant="fade" className="flex items-end justify-between mb-10">
           <div>
             <span className="text-xs font-bold text-[#E29578]">
               علاجات متطورة
@@ -261,14 +321,19 @@ export default async function HomePage() {
             <span>عرض كل الخدمات</span>
             <ChevronLeft size={16} />
           </Link>
-        </div>
+        </Reveal>
 
         {featuredServices.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Reveal
+            variant="scale"
+            staggerChildren
+            stagger={0.1}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {featuredServices.map((service) => (
               <div
                 key={service.id}
-                className="bg-white rounded-2xl overflow-hidden border border-pink-100 shadow-sm hover:shadow-lg transition-all group flex flex-col"
+                className="bg-white rounded-2xl overflow-hidden border border-pink-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col"
               >
                 <div className="relative h-48 w-full overflow-hidden bg-rose-50">
                   <img
@@ -299,39 +364,48 @@ export default async function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         ) : (
           <EmptyState />
         )}
       </section>
 
-      {/* 6. Before/After Preview */}
-      <section className="bg-pink-50/50 py-16 border-y border-pink-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="flex items-end justify-between">
+      {/* 6. Before/After Preview (Dark) */}
+      <section className="bg-[#2D1B28] py-16 sm:py-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#E29578]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative">
+          <Reveal
+            variant="slide-right"
+            className="flex items-end justify-between"
+          >
             <div>
               <span className="text-xs font-bold text-[#E29578]">
                 نتائج واقعية
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#2D1B28]">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
                 معرض نتائج قبل وبعد الجلسات
               </h2>
             </div>
             <Link
               href="/gallery"
-              className="flex items-center gap-1 text-sm font-bold text-[#E29578] hover:text-[#2D1B28] transition-colors"
+              className="flex items-center gap-1 text-sm font-bold text-amber-300 hover:text-white transition-colors"
             >
               <span>عرض المزيد في المعرض</span>
               <ChevronLeft size={16} />
             </Link>
-          </div>
+          </Reveal>
 
           {featuredBeforeAfters.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Reveal
+              variant="rise"
+              staggerChildren
+              stagger={0.15}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            >
               {featuredBeforeAfters.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white p-5 rounded-3xl border border-pink-100 shadow-md space-y-4"
+                  className="bg-white p-5 rounded-3xl shadow-2xl space-y-4"
                 >
                   <BeforeAfterSlider
                     beforeImage={item.beforeImage as string}
@@ -352,16 +426,16 @@ export default async function HomePage() {
                   </div>
                 </div>
               ))}
-            </div>
+            </Reveal>
           ) : (
             <EmptyState />
           )}
         </div>
       </section>
 
-      {/* 7. Recent Articles Preview */}
+      {/* 7. Recent Articles Preview (Light) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-10">
+        <Reveal variant="fade" className="flex items-end justify-between mb-10">
           <div>
             <span className="text-xs font-bold text-[#E29578]">
               معلومات وطب تجميلي
@@ -377,13 +451,14 @@ export default async function HomePage() {
             <span>الانتقال للمدونة</span>
             <ChevronLeft size={16} />
           </Link>
-        </div>
+        </Reveal>
 
         {recentArticles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {recentArticles.map((article) => (
-              <div
+            {recentArticles.map((article, idx) => (
+              <Reveal
                 key={article.id}
+                variant={idx % 2 === 0 ? "slide-right" : "slide-left"}
                 className="bg-white rounded-2xl overflow-hidden border border-pink-100 shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row group"
               >
                 <div className="md:w-5/12 h-56 md:h-auto relative bg-rose-50 overflow-hidden">
@@ -415,7 +490,7 @@ export default async function HomePage() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         ) : (
@@ -423,62 +498,80 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* 8. Reviews Preview */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold text-[#E29578]">
-            آراء مراجعاتنا
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#2D1B28]">
-            ثقة نعتز بها دائماً
-          </h2>
-        </div>
+      {/* 8. Reviews Preview (Dark) */}
+      <section className="bg-[#2D1B28] py-16 sm:py-20 relative overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <Reveal
+            variant="fade"
+            className="text-center max-w-xl mx-auto mb-10 space-y-2"
+          >
+            <span className="text-xs font-bold text-amber-300">
+              آراء مراجعاتنا
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              ثقة نعتز بها دائماً
+            </h2>
+          </Reveal>
 
-        {featuredReviews.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredReviews.map((rev) => (
-              <div
-                key={rev.id}
-                className="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm space-y-4 flex flex-col justify-between"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center gap-1 text-amber-400">
-                    {Array.from({ length: rev.rating }).map((_, i) => (
-                      <Star key={i} size={16} className="fill-amber-400" />
-                    ))}
+          {featuredReviews.length > 0 ? (
+            <Reveal
+              variant="rise"
+              staggerChildren
+              stagger={0.15}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            >
+              {featuredReviews.map((rev) => (
+                <div
+                  key={rev.id}
+                  className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:border-amber-400/30 hover:bg-white/10 transition-all space-y-4 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {Array.from({ length: rev.rating }).map((_, i) => (
+                        <Star key={i} size={16} className="fill-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-xs text-pink-100/70 leading-relaxed italic">
+                      {rev.comment}
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-600 leading-relaxed italic">
-                    {rev.comment}
-                  </p>
+                  <div className="flex items-center gap-3 pt-3 border-t border-white/10">
+                    <div className="w-10 h-10 rounded-full overflow-hidden bg-rose-100 flex items-center justify-center text-[#E29578] font-bold text-sm shrink-0">
+                      {rev.patientPhoto ? (
+                        <img
+                          src={rev.patientPhoto as string}
+                          alt={rev.patientName}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span>{rev.patientName?.charAt(0) || "؟"}</span>
+                      )}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-xs text-white">
+                        {rev.patientName}
+                      </h4>
+                      <span className="text-[10px] text-amber-300 font-medium">
+                        {rev.serviceTag}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
-                  <div className="w-10 h-10 rounded-full overflow-hidden bg-rose-100">
-                    <img
-                      src={rev.patientPhoto as string}
-                      alt={rev.patientName}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-xs text-[#2D1B28]">
-                      {rev.patientName}
-                    </h4>
-                    <span className="text-[10px] text-[#E29578] font-medium">
-                      {rev.serviceTag}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <EmptyState />
-        )}
+              ))}
+            </Reveal>
+          ) : (
+            <EmptyState />
+          )}
+        </div>
       </section>
 
       {/* 9. Final Call to Action Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-[#2D1B28] via-[#4A2D43] to-[#2D1B28] rounded-3xl p-8 sm:p-12 text-white text-center shadow-2xl relative overflow-hidden space-y-6">
+        <Reveal
+          variant="scale"
+          className="cta-shimmer bg-gradient-to-r from-[#2D1B28] via-[#4A2D43] to-[#2D1B28] rounded-3xl p-8 sm:p-12 text-white text-center shadow-2xl relative overflow-hidden space-y-6"
+        >
           <div className="relative z-10 max-w-2xl mx-auto space-y-4">
             <span className="text-xs font-bold text-amber-300 tracking-widest uppercase">
               جاهز لاستعادة نضارتك؟
@@ -493,23 +586,22 @@ export default async function HomePage() {
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <Link
                 href="/booking"
-                className="bg-[#E29578] hover:bg-[#d87b5b] text-white px-8 py-3.5 rounded-full font-bold shadow-lg text-sm transition-all"
+                className="bg-[#E29578] hover:bg-[#d87b5b] hover:scale-[1.03] active:scale-95 text-white px-8 py-3.5 rounded-full font-bold shadow-lg text-sm transition-all"
               >
                 احجز موعدك الآن
               </Link>
               <a
-                href="https://wa.me/966114567890"
+                href="https://wa.me/201142832015"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3.5 rounded-full font-bold shadow-lg text-sm transition-all"
+                className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 hover:scale-[1.03] active:scale-95 text-white px-6 py-3.5 rounded-full font-bold shadow-lg text-sm transition-all"
               >
                 <MessageCircle size={18} />
                 <span>تواصل عبر واتساب</span>
               </a>
-
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );

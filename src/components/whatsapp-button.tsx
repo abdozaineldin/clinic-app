@@ -7,7 +7,7 @@ export default function WhatsAppButton() {
   if (pathname?.startsWith("/admin")) return null;
   return (
     <a
-      href="https://wa.me/201145430300"
+      href="https://wa.me/201142832015"
       target="_blank"
       rel="noreferrer"
       aria-label="تواصل عبر واتساب"
@@ -25,3 +25,4 @@ export default function WhatsAppButton() {
     </a>
   );
 }
+

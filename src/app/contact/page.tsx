@@ -87,7 +87,7 @@ export default function ContactPage() {
                   <h4 className="font-bold text-sm text-white">
                     العنوان الرئيسي
                   </h4>
-                  <p className="text-xs text-slate-300">النزل، القاهرة - مصر</p>
+                  <p className="text-xs text-slate-300">الفرع الرئيسي: الزرقا - أمام مستشفي الزرقا المركزي</p>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ export default function ContactPage() {
                     هاتف العيادة والواتساب
                   </h4>
                   <p className="text-xs text-slate-300" dir="ltr">
-                    +20 123 456 7890
+                    +201142832015
                   </p>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function ContactPage() {
                     البريد الإلكتروني
                   </h4>
                   <p className="text-xs text-slate-300">
-                    info@drmanalsarhan.com
+                    Manalsarhan687@gmail.com
                   </p>
                 </div>
               </div>

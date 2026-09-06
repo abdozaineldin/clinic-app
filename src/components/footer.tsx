@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Sparkles,
+  Flower2,
   MapPin,
   Phone,
   Mail,
@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#E29578] to-[#D4AF37] flex items-center justify-center text-white shadow-md">
-                <Sparkles size={20} className="text-[#1A0F1B]" />
+                <Flower2 size={20} className="text-[#1A0F1B]" />
               </div>
               <span className="text-xl font-extrabold text-white">
                 د. منال سرحان
@@ -45,7 +45,7 @@ export default function Footer() {
                 <Share2 size={16} />
               </a>
               <a
-                href="https://wa.me/201234567890"
+                href="https://wa.me/201142832015"
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-full bg-white/5 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-colors text-emerald-400"
@@ -184,15 +184,15 @@ export default function Footer() {
             </h3>
             <div className="flex items-start gap-2.5 text-xs">
               <MapPin size={16} className="text-[#E29578] shrink-0 mt-0.5" />
-              <span>النزل، القاهرة - مصر (الفرع الرئيسي)</span>
+              <span>الفرع الرئيسي: الزرقا - أمام مستشفي الزرقا المركزي</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs">
               <Phone size={16} className="text-[#E29578] shrink-0" />
-              <span dir="ltr">+966 11 456 7890</span>
+              <span dir="ltr">+201142832015</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs">
               <Mail size={16} className="text-[#E29578] shrink-0" />
-              <span>info@drmanalsarhan.com</span>
+              <span>Manalsarhan687@gmail.com</span>
             </div>
             <div className="flex items-start gap-2.5 text-xs pt-1 text-pink-200/80">
               <Clock size={16} className="text-amber-300 shrink-0 mt-0.5" />

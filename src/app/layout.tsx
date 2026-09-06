@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl">
       <body className="min-h-screen flex flex-col bg-[#FDF8F6] text-[#2D1B28] antialiased font-sans">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-30">{children}</main>
         <Footer />
         <WhatsAppButton />
         <ScrollToTop />

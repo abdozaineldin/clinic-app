@@ -7,6 +7,18 @@ import { getArticles } from "@/lib/supabase-data";
 import { ArticleData } from "@/lib/types";
 import { Plus, Edit3, Trash2, FileText, CheckCircle } from "lucide-react";
 
+function generateSafeSlug(title: string): string {
+  const timestamp = Date.now().toString().slice(-6);
+  const cleanTitle = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // يشيل أي حرف مش إنجليزي أو رقم (يعني يشيل العربي تماماً)
+    .trim()
+    .replace(/\s+/g, "-") // يستبدل المسافات بشرطة
+    .replace(/-+/g, "-"); // يمنع تكرار الشرطات
+
+  return cleanTitle ? `${cleanTitle}-${timestamp}` : `article-${timestamp}`;
+}
+
 export default function AdminArticlesManager() {
   const [articles, setArticles] = useState<ArticleData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -68,7 +80,7 @@ export default function AdminArticlesManager() {
     e.preventDefault();
     if (!title || !content) return;
 
-    const generatedSlug = slug || title.toLowerCase().replace(/\s+/g, "-");
+    const generatedSlug = slug || generateSafeSlug(title);
     const payload = {
       title,
       slug: generatedSlug,
