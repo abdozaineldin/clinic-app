@@ -91,12 +91,7 @@ export interface BeautyCenterPageData {
 // 6. BeforeAfter Collection Type
 export interface BeforeAfterData {
   id: string | number;
-  beforeImage: StrapiMedia | string;
-  afterImage: StrapiMedia | string;
-  treatmentName: string;
-  sessionsCount: number;
-  category: string;
-  bodyArea: string;
+  image: string;
 }
 
 // 7. Article Collection Type
@@ -123,12 +118,7 @@ export interface FAQData {
 // 9. Review Collection Type
 export interface ReviewData {
   id: string | number;
-  patientName: string;
-  patientPhoto?: StrapiMedia | string;
-  rating: number;
-  comment: string;
-  serviceTag: string;
-  postedDate: string;
+  image: string;
 }
 
 // 10. ContactMessage Submission Type

@@ -184,7 +184,7 @@ export default function Footer() {
             </h3>
             <div className="flex items-start gap-2.5 text-xs">
               <MapPin size={16} className="text-[#E29578] shrink-0 mt-0.5" />
-              <span>الفرع الرئيسي: الزرقا - أمام مستشفي الزرقا المركزي</span>
+              <span>الفرع الرئيسي: الزرقا - أمام معرض رخا وحلواني صن سيت</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs">
               <Phone size={16} className="text-[#E29578] shrink-0" />

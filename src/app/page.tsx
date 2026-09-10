@@ -395,41 +395,29 @@ export default async function HomePage() {
             </Link>
           </Reveal>
 
-          {featuredBeforeAfters.length > 0 ? (
-            <Reveal
-              variant="rise"
-              staggerChildren
-              stagger={0.15}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            >
-              {featuredBeforeAfters.map((item) => (
-                <div
-                  key={item.id}
-                  className="bg-white p-5 rounded-3xl shadow-2xl space-y-4"
-                >
-                  <BeforeAfterSlider
-                    beforeImage={item.beforeImage as string}
-                    afterImage={item.afterImage as string}
-                  />
-                  <div className="flex items-center justify-between pt-2">
-                    <div>
-                      <h4 className="font-bold text-[#2D1B28] text-base">
-                        {item.treatmentName}
-                      </h4>
-                      <p className="text-xs text-slate-500">
-                        منطقة العلاج: {item.bodyArea}
-                      </p>
-                    </div>
-                    <span className="bg-pink-100 text-[#2D1B28] text-xs font-bold px-3 py-1 rounded-full">
-                      {item.sessionsCount} جلسات
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </Reveal>
-          ) : (
-            <EmptyState />
-          )}
+        {featuredBeforeAfters.length > 0 ? (
+          <Reveal
+            variant="rise"
+            staggerChildren
+            stagger={0.15}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            {featuredBeforeAfters.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white p-3 rounded-3xl shadow-2xl overflow-hidden"
+              >
+                <img
+                  src={item.image as string}
+                  alt="نتيجة قبل وبعد"
+                  className="w-full h-auto rounded-2xl"
+                />
+              </div>
+            ))}
+          </Reveal>
+        ) : (
+          <EmptyState />
+        )}
         </div>
       </section>
 
@@ -503,15 +491,24 @@ export default async function HomePage() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <Reveal
-            variant="fade"
-            className="text-center max-w-xl mx-auto mb-10 space-y-2"
+            variant="slide-right"
+            className="flex items-end justify-between mb-10"
           >
-            <span className="text-xs font-bold text-amber-300">
-              آراء مراجعاتنا
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              ثقة نعتز بها دائماً
-            </h2>
+            <div>
+              <span className="text-xs font-bold text-amber-300">
+                آراء مراجعاتنا
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+                ثقة نعتز بها دائماً
+              </h2>
+            </div>
+            <Link
+              href="/reviews"
+              className="flex items-center gap-1 text-sm font-bold text-amber-300 hover:text-white transition-colors"
+            >
+              <span>عرض جميع التقييمات</span>
+              <ChevronLeft size={16} />
+            </Link>
           </Reveal>
 
           {featuredReviews.length > 0 ? (
@@ -524,39 +521,13 @@ export default async function HomePage() {
               {featuredReviews.map((rev) => (
                 <div
                   key={rev.id}
-                  className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:border-amber-400/30 hover:bg-white/10 transition-all space-y-4 flex flex-col justify-between"
+                  className="bg-white p-3 rounded-2xl shadow-lg overflow-hidden"
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-1 text-amber-400">
-                      {Array.from({ length: rev.rating }).map((_, i) => (
-                        <Star key={i} size={16} className="fill-amber-400" />
-                      ))}
-                    </div>
-                    <p className="text-xs text-pink-100/70 leading-relaxed italic">
-                      {rev.comment}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 pt-3 border-t border-white/10">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-rose-100 flex items-center justify-center text-[#E29578] font-bold text-sm shrink-0">
-                      {rev.patientPhoto ? (
-                        <img
-                          src={rev.patientPhoto as string}
-                          alt={rev.patientName}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <span>{rev.patientName?.charAt(0) || "؟"}</span>
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-xs text-white">
-                        {rev.patientName}
-                      </h4>
-                      <span className="text-[10px] text-amber-300 font-medium">
-                        {rev.serviceTag}
-                      </span>
-                    </div>
-                  </div>
+                  <img
+                    src={rev.image as string}
+                    alt="تقييم مريض"
+                    className="w-full h-auto rounded-xl"
+                  />
                 </div>
               ))}
             </Reveal>

@@ -87,7 +87,7 @@ export default function ContactPage() {
                   <h4 className="font-bold text-sm text-white">
                     العنوان الرئيسي
                   </h4>
-                  <p className="text-xs text-slate-300">الفرع الرئيسي: الزرقا - أمام مستشفي الزرقا المركزي</p>
+                  <p className="text-xs text-slate-300">الفرع الرئيسي: الزرقا - امام معرض رخا وحلواني صن سيت</p>
                 </div>
               </div>
 

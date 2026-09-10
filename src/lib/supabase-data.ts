@@ -227,12 +227,7 @@ export async function getBeforeAfters(): Promise<BeforeAfterData[]> {
 
     return data.map((item) => ({
       id: item.id,
-      treatmentName: item.treatment_name,
-      category: item.category,
-      sessionsCount: item.sessions_count,
-      bodyArea: item.body_area,
-      beforeImage: item.before_image_url,
-      afterImage: item.after_image_url,
+      image: item.image_url,
     }));
   } catch (error) {
     console.error("Error fetching before/after cases from Supabase:", error);
@@ -312,12 +307,7 @@ export async function getReviews(): Promise<ReviewData[]> {
 
     return data.map((item) => ({
       id: item.id,
-      patientName: item.patient_name,
-      patientPhoto: item.patient_photo_url,
-      rating: item.rating ?? 5,
-      comment: item.comment,
-      serviceTag: item.service_tag,
-      postedDate: item.posted_date,
+      image: item.image_url,
     }));
   } catch (error) {
     console.error("Error fetching reviews from Supabase:", error);
